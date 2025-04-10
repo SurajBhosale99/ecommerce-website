@@ -1,0 +1,15 @@
+# macOS system file
+.DS_Store
+
+# Eclipse project files
+.project
+.classpath
+
+# Java build files
+*.class
+bin/
+target/
+
+# Node.js
+node_modules/
+.env
