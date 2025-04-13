@@ -13,3 +13,5 @@ target/
 # Node.js
 node_modules/
 .env
+
+frontend/.DS_Store
