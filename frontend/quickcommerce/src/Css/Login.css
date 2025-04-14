@@ -1,0 +1,226 @@
+/* Modal Background Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* Darker for better contrast */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(10px); /* Softer blur effect */
+  z-index: 1050;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Modal Content */
+.modal-content {
+  background: rgba(255, 255, 255, 0.98); /* Slightly more opacity for a clean look */
+  border-radius: 12px;
+  max-width: 420px;
+  width: 90%;
+  padding: 35px 28px; /* Increased padding for better spacing */
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+  animation: slideIn 0.3s ease-in-out;
+  position: relative;
+}
+
+/* Modal Header */
+.modal-header {
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  color: #222; /* Slightly darker for better contrast */
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+}
+
+/* Close Button */
+.close-btn {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  background: none;
+  border: none;
+  color: #444;
+  font-size: 24px;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.close-btn:hover {
+  color: #ff4d4d;
+  transform: scale(1.1);
+}
+
+/* Input Fields */
+.form-control {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 16px;
+  transition: all 0.3s ease-in-out;
+  background: #fff;
+  box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.05),
+              inset -3px -3px 6px rgba(255, 255, 255, 0.5);
+}
+
+.form-control::placeholder {
+  color: #aaa;
+  font-style: italic;
+}
+
+.form-control:focus {
+  border-color: #6c63ff;
+  outline: none;
+  box-shadow: 0 0 8px rgba(108, 99, 255, 0.4);
+}
+
+/* Buttons */
+.btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  border: none;
+  text-transform: uppercase;
+}
+
+/* Primary Button */
+.btn-primary {
+  background: linear-gradient(135deg, #6c63ff, #5444e3);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #5a54e3, #4332d4);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(108, 99, 255, 0.3);
+}
+
+/* Secondary Button */
+.btn-secondary {
+  background: #eaeaea;
+  color: #333;
+}
+
+.btn-secondary:hover {
+  background: #d0d0d0;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Step Heading */
+.step-heading {
+  font-size: 18px;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 500px) {
+  .modal-content {
+    padding: 25px;
+    width: 95%;
+  }
+  
+  .modal-header {
+    font-size: 22px;
+  }
+
+  .form-control {
+    padding: 12px;
+  }
+}
+
+/* Custom Flexbox Layout */
+.input-group-custom {
+  display: flex;
+  align-items: stretch;  /* Ensure both elements stretch to match height */
+  border: 1px solid #ddd;
+  border-radius: 8px;  /* Add a border radius for the outer container */
+  height: 48px;  /* Set a fixed height for both input fields */
+  background-color: #f9f9f9;
+}
+
+/* Country Code (+91) Styling */
+.input-group-custom .country-code {
+  background-color: #f9f9f9;
+  color: #555;
+  padding: 0 12px;  /* Padding for better alignment */
+  font-size: 16px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;  /* Center the country code vertically */
+  justify-content: center;
+  height: 100%;  /* Ensure it matches input height */
+  border-right: 1px solid #ddd;
+  line-height: 1;  /* Ensure the text is centered vertically */
+  border-radius: 0;  /* No border-radius for country code box */
+}
+
+/* Mobile Number Input Styling */
+.input-group-custom .form-control {
+  border: none;
+  height: 100%;  /* Match the height with country code */
+  padding: 10px 12px;  /* Add padding to prevent overlap with country code */
+  font-size: 16px;
+  line-height: 1;  /* Ensure text is centered vertically */
+  flex: 1;  /* Ensures the input takes up the remaining space */
+  box-shadow: none;  /* Remove any inner shadow for a cleaner look */
+  border-left: 1px solid #ddd;  /* Adds separation between country code and input field */
+  border-radius: 0;  /* Remove the border-radius for the input field */
+}
+
+/* Remove placeholder overlap */
+.input-group-custom .form-control::placeholder {
+  color: #aaa;
+  font-style: italic;
+}
+/* "Download Our App" Section */
+.app-download {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.app-download p {
+  font-size: 14px;
+  color: #555;
+  font-weight: 500;
+}
+
+.app-store-btn {
+  width: 140px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.app-store-btn:hover {
+  transform: scale(1.07);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-20px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,168 @@
+/* Footer Styles */
+.footer {
+  background: #ffffff; /* White background for a clean look */
+  color: #333; /* Dark gray text for contrast */
+  padding: 40px 20px;
+  text-align: center;
+  margin-top: auto; /* Ensures the footer stays at the bottom */
+  border-top: 2px solid #ddd; /* Subtle border for separation */
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-section {
+  flex: 1;
+  min-width: 250px;
+  margin-bottom: 20px;
+}
+
+.footer-section h2,
+.footer-section h3 {
+  margin-bottom: 10px;
+  color: #f39c12; /* Accent color for headings */
+}
+
+.footer-section p,
+.footer-section ul {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #555; /* Slightly lighter gray for better readability */
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin: 8px 0;
+}
+
+.footer-section ul li a {
+  color: #555; /* Lighter gray text for links */
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+  color: #f39c12; /* Highlight color on hover */
+}
+
+/* Social Media Icons */
+.social-icons {
+  display: flex;
+  gap: 15px;
+  justify-content: flex-end; /* Align icons to the right */
+}
+
+.social-icons a {
+  color: #555; /* Lighter gray icons */
+  font-size: 24px;
+  transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+  color: #f39c12; /* Highlight color on hover */
+}
+
+/* Download App Section */
+.download-app {
+  display: flex; /* Use flexbox to align elements horizontally */
+  align-items: center; /* Align vertically in the center */
+  gap: 15px; /* Space between "Download App" text and app icons */
+}
+
+.download-app p {
+  font-size: 16px;
+  font-weight: bold;
+  color: #f39c12;
+  margin: 0; /* Remove default margin */
+}
+
+.app-store-links {
+  display: flex; /* Align app store icons horizontally */
+}
+
+.app-store-icon {
+  width: 120px; /* Reduced size */
+  margin: 0 10px;
+  transition: opacity 0.3s ease;
+}
+
+.app-store-icon:hover {
+  opacity: 0.8;
+}
+
+
+
+/* Copyright & Social Media Layout */
+.footer-bottom {
+  margin-top: 20px;
+  font-size: 14px;
+  padding-top: 10px;
+  display: flex;
+  justify-content: space-between; /* Space between text, download link, and icons */
+  align-items: center;
+  max-width: 1200px; /* Increased width */
+  margin: 0 auto; /* Center align the footer bottom */
+  border: 2px solid #ddd; /* Add box border around footer-bottom */
+  border-radius: 8px; /* Optional: Add rounded corners for a smoother look */
+  padding: 15px; /* Add padding inside the box for spacing */
+  background-color: #f4f4f4; /* Light gray background color */
+}
+
+.footer-bottom p {
+  margin-left: 20px;
+  text-align: center;
+  align-items: center;
+}
+.footer-copy {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-section {
+    text-align: center;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-bottom .social-icons {
+    justify-content: center;
+  }
+
+  .footer-bottom .download-app {
+    margin-top: 10px;
+    text-align: center;
+  }
+}
+
+/* Ensure footer is pushed to the bottom */
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  margin: 0;
+}
+
+main {
+  flex-grow: 1; /* Ensures main content takes the remaining space */
+}
