@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.ecommerce.common.Role;
 import com.ecommerce.user_service.dao.UserRepository;
 import com.ecommerce.user_service.entity.User;
+import com.ecommerce.user_service.security.JwtUtil;
 
 @Service
 public class UserService {
@@ -21,6 +22,9 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+  
+    @Autowired
+    private JwtUtil jwtUtil;
 
     // Generate OTP and store it
     // Generate OTP method
@@ -45,24 +49,23 @@ public class UserService {
         return otp;
     }
 
-    // Verify OTP
-    public boolean verifyOTP(String mobileNumber, String otp) {
+    // Separate method to verify and generate JWT
+    public String verifyAndGenerateToken(String mobileNumber, String otp) {
         String storedOtp = otpStore.get(mobileNumber);
         Long expiryTime = otpExpiry.get(mobileNumber);
 
-        // Check if OTP is correct and not expired
         if (storedOtp != null && storedOtp.equals(otp) && System.currentTimeMillis() < expiryTime) {
-            otpStore.remove(mobileNumber); // Remove OTP after successful verification
+            otpStore.remove(mobileNumber);
             otpExpiry.remove(mobileNumber);
 
-            // Update user's OTP status in the database
             User user = userRepository.findByMobileNumber(mobileNumber)
                     .orElseThrow(() -> new IllegalArgumentException("User not found"));
             user.setOtpVerified(true);
-            userRepository.save(user); // Save the updated OTP verification status
+            userRepository.save(user);
 
-            return true;
+            return jwtUtil.generateToken(user);
         }
-        return false;
+
+        return null; // invalid or expired OTP
     }
 }

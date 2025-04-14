@@ -3,11 +3,8 @@ package com.ecommerce.user_service.controller;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import com.ecommerce.user_service.service.UserService;
 
@@ -20,11 +17,23 @@ public class UserController {
 
     @PostMapping("/generate")
     public String generateOTP(@RequestBody Map<String, String> requestBody) {
-        String mobileNumber = requestBody.get("mobile"); // Get "mobile" from the request
+        String mobileNumber = requestBody.get("mobile");
         return userService.generateOTP(mobileNumber);
     }
-    @PostMapping("/verify")
-    public String verifyOTP(@RequestParam String mobileNumber, @RequestParam String otp) {
-        return userService.verifyOTP(mobileNumber, otp) ? "OTP Verified!" : "Invalid OTP or OTP expired.";
+
+    // New Endpoint: Authenticates via OTP and returns JWT
+    @PostMapping("/auth")
+    public ResponseEntity<?> authenticateUser(@RequestBody Map<String, String> requestBody) {
+        String mobileNumber = requestBody.get("mobile");
+        String otp = requestBody.get("otp");
+
+        String token = userService.verifyAndGenerateToken(mobileNumber, otp);
+
+        if (token == null) {
+            return ResponseEntity.status(401).body("Invalid or expired OTP.");
+        }
+
+        return ResponseEntity.ok(Map.of("token", token));
     }
+
 }
