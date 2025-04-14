@@ -1,0 +1,29 @@
+/* App.css */
+
+/* Ensure no margin/padding on the body or html */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+  
+  /* Custom Navbar */
+  .navbar-custom {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    /* Other styling like background gradient, padding, etc. */
+  }
+  
+  /* Main content below navbar */
+  .home-page {
+    margin-top: 80px; /* Adjust this value based on your navbar height */
+    padding: 20px;
+  }
+  
+  /* Adjust carousel or other elements as needed */
+  .carousel {
+    margin-top: 80px; /* Same as navbar height */
+  }

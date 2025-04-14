@@ -1,0 +1,128 @@
+.best-brew-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+    padding: 20px;
+    background: linear-gradient(135deg, #b3e4da, #bae4cf); /* Light Neon Effect */
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(208, 204, 152, 0.5); /* Soft Neon Glow */
+    
+    min-height: 400px; /* Increase height */
+}
+
+/* Left Side - Best Brew (30% width) */
+.best-brew {
+    flex: 0 0 30%; /* Takes exactly 30% of the container */
+    background-color: #2c3e50;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 250px;
+    
+    height: 100%; /* Make it take the full height of the parent */
+    min-height: 350px; /* Ensure it has enough height */
+}
+
+.best-brew img {
+    width: 100%;
+    max-width: 250px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+/* Right Side - Scrollable Coffee List (70% width) */
+.coffee-scroll-container {
+    flex: 0 0 70%; /* Takes 70% of the width */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.coffee-scroll-title {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* Hide scrollbar while keeping horizontal scroll functional */
+.coffee-list {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 15px;
+    padding: 10px;
+    white-space: nowrap;
+    width: 100%;
+    
+    /* Hide scrollbar */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer and Edge */
+}
+
+.coffee-list::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+}
+.coffee-item {
+    flex: 0 0 auto;
+    width: 150px;
+    text-align: center;
+}
+
+.coffee-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+/* Scroll Buttons */
+.scroll-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.left-scroll {
+    left: 10px;
+}
+
+.right-scroll {
+    right: 10px;
+}
+
+.scroll-button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .best-brew-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .best-brew {
+        flex: 1;
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .coffee-scroll-container {
+        flex: 1;
+        width: 100%;
+    }
+}
