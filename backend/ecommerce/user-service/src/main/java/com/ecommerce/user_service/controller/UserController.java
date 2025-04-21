@@ -1,11 +1,8 @@
 package com.ecommerce.user_service.controller;
 
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
 import com.ecommerce.user_service.service.UserService;
 
 @RestController
@@ -15,25 +12,29 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    // Generate OTP
     @PostMapping("/generate")
-    public String generateOTP(@RequestBody Map<String, String> requestBody) {
-        String mobileNumber = requestBody.get("mobile");
+    public String generateOtp(@RequestParam String mobileNumber) {
         return userService.generateOTP(mobileNumber);
     }
 
-    // New Endpoint: Authenticates via OTP and returns JWT
-    @PostMapping("/auth")
-    public ResponseEntity<?> authenticateUser(@RequestBody Map<String, String> requestBody) {
-        String mobileNumber = requestBody.get("mobile");
-        String otp = requestBody.get("otp");
+    // Verify OTP and generate JWT token
+    @PostMapping("/verify")
+    public String verifyOtpAndGenerateToken(@RequestParam String mobileNumber, @RequestParam String otp) {
+        System.out.println("Generating OTP for: " + mobileNumber);  // Log to see if it's reached
 
-        String token = userService.verifyAndGenerateToken(mobileNumber, otp);
-
-        if (token == null) {
-            return ResponseEntity.status(401).body("Invalid or expired OTP.");
-        }
-
-        return ResponseEntity.ok(Map.of("token", token));
+        return userService.verifyOTP(mobileNumber, otp); // Returns JWT token
+    }
+    
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/api/user/admin")
+    public String getAdminData() {
+        return "Hello Admin! You have access to this data.";
     }
 
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping("/user")
+    public String getUserData() {
+        return "Hello User! You have access to this data.";
+    }
 }

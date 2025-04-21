@@ -1,13 +1,51 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
   <modelVersion>4.0.0</modelVersion>
+
   <parent>
     <groupId>com.ecommerce</groupId>
     <artifactId>ecommerce</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
+
   <groupId>com.ecommerce.common</groupId>
   <artifactId>common-library</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>common-library</name>
-  <description>common functinalities of microservices</description>
+  <description>Common functionalities of microservices</description>
+
+  <dependencies>
+<dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>1.18.30</version>
+        <scope>provided</scope>
+    </dependency>
+<dependency>
+    <groupId>io.jsonwebtoken</groupId>
+    <artifactId>jjwt-api</artifactId>
+    <version>0.11.5</version>
+</dependency>
+<dependency>
+    <groupId>io.jsonwebtoken</groupId>
+    <artifactId>jjwt-impl</artifactId>
+    <version>0.11.5</version>
+    <scope>runtime</scope>
+</dependency>
+<dependency>
+    <groupId>io.jsonwebtoken</groupId>
+    <artifactId>jjwt-jackson</artifactId> <!-- or jjwt-gson or jjwt-orgjson -->
+    <version>0.11.5</version>
+    <scope>runtime</scope>
+</dependency>
+    <!-- Spring context -->
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        <version>5.3.33</version> <!-- You can match this with your Spring Boot version -->
+    </dependency>
+</dependencies>
+
 </project>

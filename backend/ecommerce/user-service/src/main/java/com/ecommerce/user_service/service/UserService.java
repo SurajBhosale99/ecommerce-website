@@ -1,60 +1,46 @@
 package com.ecommerce.user_service.service;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-
+import com.ecommerce.common.Role;
+import com.ecommerce.common.security.JwtUtil;
+import com.ecommerce.user_service.dao.UserRepository;
+import com.ecommerce.user_service.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ecommerce.common.Role;
-import com.ecommerce.user_service.dao.UserRepository;
-import com.ecommerce.user_service.entity.User;
-import com.ecommerce.user_service.security.JwtUtil;
+import java.util.*;
 
 @Service
 public class UserService {
 
-	//private final UserRepository userRepository;
     private final Map<String, String> otpStore = new HashMap<>();
     private final Map<String, Long> otpExpiry = new HashMap<>();
-    private final long OTP_EXPIRY_TIME = 300000; // 5 minutes in milliseconds
+    private final long OTP_EXPIRY_TIME = 300000; // 5 mins
 
     @Autowired
     private UserRepository userRepository;
-  
+
     @Autowired
     private JwtUtil jwtUtil;
 
-    // Generate OTP and store it
-    // Generate OTP method
     public String generateOTP(String mobileNumber) {
-        // Generate a 6-digit OTP
         String otp = String.format("%06d", new Random().nextInt(999999));
         otpStore.put(mobileNumber, otp);
-        otpExpiry.put(mobileNumber, System.currentTimeMillis() + OTP_EXPIRY_TIME); // Expiry time: 5 minutes
+        otpExpiry.put(mobileNumber, System.currentTimeMillis() + OTP_EXPIRY_TIME);
 
-        // Save or update user info in the database
         User user = userRepository.findByMobileNumber(mobileNumber)
-                .orElse(new User(mobileNumber)); // If user not found, create a new one
-        user.setOtpVerified(false); // Set OTP as unverified initially
+                .orElse(new User(mobileNumber));
+        user.setOtpVerified(false);
+        user.setRole(Role.USER);
         userRepository.save(user);
-     // Set the default role if the user does not have a role already
-        if (user.getRole() == null) {
-            user.setRole(Role.USER); // Set default role as USER
-        }
-        // Simulate sending OTP to user's mobile number (replace with actual SMS integration)
-       // sendOtpToMobile(mobileNumber, otp);
 
         return otp;
     }
 
-    // Separate method to verify and generate JWT
-    public String verifyAndGenerateToken(String mobileNumber, String otp) {
+    public String verifyOTP(String mobileNumber, String otp) {
         String storedOtp = otpStore.get(mobileNumber);
-        Long expiryTime = otpExpiry.get(mobileNumber);
+        Long expiry = otpExpiry.get(mobileNumber);
 
-        if (storedOtp != null && storedOtp.equals(otp) && System.currentTimeMillis() < expiryTime) {
+        if (storedOtp != null && storedOtp.equals(otp) && System.currentTimeMillis() < expiry) {
             otpStore.remove(mobileNumber);
             otpExpiry.remove(mobileNumber);
 
@@ -63,9 +49,9 @@ public class UserService {
             user.setOtpVerified(true);
             userRepository.save(user);
 
-            return jwtUtil.generateToken(user);
+            return jwtUtil.generateToken(user.getMobileNumber(), user.getRole().toString());
         }
 
-        return null; // invalid or expired OTP
+        throw new IllegalArgumentException("Invalid or expired OTP");
     }
 }
