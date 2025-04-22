@@ -30,7 +30,7 @@ public class UserService {
         User user = userRepository.findByMobileNumber(mobileNumber)
                 .orElse(new User(mobileNumber));
         user.setOtpVerified(false);
-        user.setRole(Role.USER);
+        user.setRole(Role.ROLE_USER);
         userRepository.save(user);
 
         return otp;
@@ -49,7 +49,7 @@ public class UserService {
             user.setOtpVerified(true);
             userRepository.save(user);
 
-            return jwtUtil.generateToken(user.getMobileNumber(), user.getRole().toString());
+            return jwtUtil.generateToken(user.getMobileNumber(), user.getRole());
         }
 
         throw new IllegalArgumentException("Invalid or expired OTP");

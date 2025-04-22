@@ -21,8 +21,9 @@ public class CustomJwtAuthenticationConverter extends JwtAuthenticationConverter
         public Collection<GrantedAuthority> convert(Jwt jwt) {
             List<GrantedAuthority> authorities = new ArrayList<>();
             String role = jwt.getClaimAsString("role");
+            System.out.println("JWT Role: " + role);  // Log to see the role value
             if (role != null) {
-                authorities.add(new SimpleGrantedAuthority("ROLE_" + role));
+                authorities.add(new SimpleGrantedAuthority("ROLE_" + role));  // Ensure correct role format
             }
             return authorities;
         }

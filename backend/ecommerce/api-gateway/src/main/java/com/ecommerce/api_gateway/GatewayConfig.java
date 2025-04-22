@@ -17,8 +17,11 @@ public class GatewayConfig {
 
     @Bean
     public RouteLocator routeLocator(RouteLocatorBuilder builder) {
+    	System.out.println("I am here");
+
         return builder.routes()
                 .route("user_route", r -> r.path("/api/user/**")
+                		
                         .filters(f -> f.filter(jwtAuthenticationFilter.apply(new JwtAuthenticationFilter.Config())))
                         .uri("lb://user-service"))
                 .build();

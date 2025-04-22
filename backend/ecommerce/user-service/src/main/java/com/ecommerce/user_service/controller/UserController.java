@@ -2,6 +2,8 @@ package com.ecommerce.user_service.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import com.ecommerce.user_service.service.UserService;
 
@@ -27,14 +29,17 @@ public class UserController {
     }
     
     @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("/api/user/admin")
+    @GetMapping("/admin")
     public String getAdminData() {
         return "Hello Admin! You have access to this data.";
     }
 
-    @PreAuthorize("hasRole('USER')")
+    //@PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/user")
     public String getUserData() {
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println("Authorities: " + auth.getAuthorities());
+
         return "Hello User! You have access to this data.";
     }
 }
