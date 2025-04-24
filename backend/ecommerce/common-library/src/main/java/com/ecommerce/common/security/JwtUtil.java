@@ -20,6 +20,8 @@ public class JwtUtil {
 
     // Generate JWT token
     public String generateToken(String subject, Role role) {
+        System.out.println("Generating token for role: " + role.name());
+
         return Jwts.builder()
                 .setSubject(subject)
                 .claim("role", role.name())
@@ -29,7 +31,7 @@ public class JwtUtil {
                 .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
     }
-
+    
     // Validate JWT token
     public Claims validateToken(String token) {
         try {

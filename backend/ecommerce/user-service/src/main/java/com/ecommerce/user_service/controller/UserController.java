@@ -34,7 +34,7 @@ public class UserController {
         return "Hello Admin! You have access to this data.";
     }
 
-    //@PreAuthorize("hasRole('ROLE_USER')")
+    @PreAuthorize("hasRole('USER')")
     @GetMapping("/user")
     public String getUserData() {
     	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
