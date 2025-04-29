@@ -1,0 +1,36 @@
+<Configuration status="info">
+	<Properties>
+		<Property name="log.path">logs</Property>
+	</Properties>
+
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout
+				pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+		</Console>
+
+		<RollingFile name="ErrorFileLogger"
+			fileName="${log.path}/ecommerce-error.log"
+			filePattern="${log.path}/ecommerce-error-%d{yyyy-MM-dd}.log">
+			<PatternLayout>
+				<Pattern>%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n
+				</Pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+			</Policies>
+			<Filters>
+				<ThresholdFilter level="INFO" onMatch="ACCEPT"
+					onMismatch="DENY" />
+			</Filters>
+		</RollingFile>
+	</Appenders>
+
+	<Loggers>
+		<Root level="info">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="RollingFileLogger" />
+		</Root>
+	</Loggers>
+</Configuration>

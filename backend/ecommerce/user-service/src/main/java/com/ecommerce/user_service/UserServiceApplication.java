@@ -5,7 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication(scanBasePackages = {
 	    "com.ecommerce.user_service",
-	    "com.ecommerce.common.security"  // 👈 Add this line to include JwtUtil
+	    "com.ecommerce.common.security" ,
+	    "com.ecommerce.common"// 👈 Add this line to include JwtUtil
 	})
 public class UserServiceApplication {
 

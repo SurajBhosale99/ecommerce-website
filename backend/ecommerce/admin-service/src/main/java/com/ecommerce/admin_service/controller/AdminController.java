@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AdminController {
 
     @GetMapping("/message")
-    public String getMessage() {
+    public String getMessage() {	
         return "You are logged in through API Gateway";
     }
 }

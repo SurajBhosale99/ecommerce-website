@@ -46,6 +46,11 @@
         <artifactId>spring-context</artifactId>
         <version>5.3.33</version> <!-- You can match this with your Spring Boot version -->
     </dependency>
+    <dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+</dependency>
+    
 </dependencies>
 
 </project>
